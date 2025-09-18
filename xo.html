@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>لعبة XO ❌⭕</title>
+<style>
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #d8b4e2 100%);
+    color: #3a2a5a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  h1 {
+    margin-bottom: 1rem;
+    color: #5a4fcf;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+  }
+  .cell {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(90,79,207,0.15);
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .cell:hover {
+    background: #d8b4e2;
+  }
+  .status {
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    min-height: 2rem;
+  }
+  button {
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 15px;
+    background: #5a4fcf;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #3a2a5a;
+  }
+  a {
+    margin-top: 1rem;
+    color: #5a4fcf;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<h1>لعبة XO ❌⭕</h1>
+
+<div class="board" role="grid" aria-label="لوحة لعبة XO">
+  <div class="cell" role="gridcell" tabindex="0" data-index="0" aria-label="خلية 1"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="1" aria-label="خلية 2"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="2" aria-label="خلية 3"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="3" aria-label="خلية 4"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="4" aria-label="خلية 5"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="5" aria-label="خلية 6"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="6" aria-label="خلية 7"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="7" aria-label="خلية 8"></div>
+  <div class="cell" role="gridcell" tabindex="0" data-index="8" aria-label="خلية 9"></div>
+</div>
+
+<div class="status" aria-live="polite" aria-atomic="true"></div>
+
+<button id="restart">إعادة اللعب</button>
+
+<a href="index.html">⬅ العودة للرئيسية</a>
+
+<script>
+  const board = document.querySelector('.board');
+  const cells = document.querySelectorAll('.cell');
+  const statusDiv = document.querySelector('.status');
+  const restartBtn = document.getElementById('restart');
+
+  let boardState = Array(9).fill(null);
+  let currentPlayer = '❌';
+  let gameActive = true;
+
+  const winningCombinations = [
+    [0,1,2],[3,4,5],[6,7,8], // صفوف
+    [0,3,6],[1,4,7],[2,5,8], // أعمدة
+    [0,4,8],[2,4,6]          // أقطار
+  ];
+
+  function checkWin() {
+    for (const combo of winningCombinations) {
+      const [a,b,c] = combo;
+      if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
+        return boardState[a];
+      }
+    }
+    return null;
+  }
+
+  function checkDraw() {
+    return boardState.every(cell => cell !== null);
+  }
+
+  function updateStatus(message) {
+    statusDiv.textContent = message;
+  }
+
+  function handleCellClick(e) {
+    const index = e.target.getAttribute('data-index');
+    if (!gameActive || boardState[index]) return;
+
+    boardState[index] = currentPlayer;
+    e.target.textContent = currentPlayer;
+
+    const winner = checkWin();
+    if (winner) {
+      updateStatus(`اللاعب ${winner} فاز! 🎉`);
+      gameActive = false;
+      return;
+    }
+
+    if (checkDraw()) {
+      updateStatus('تعادل! 🤝');
+      gameActive = false;
+      return;
+    }
+
+    currentPlayer = currentPlayer === '❌' ? '⭕' : '❌';
+    updateStatus(`دور اللاعب ${currentPlayer}`);
+  }
+
+  function restartGame() {
+    boardState.fill(null);
+    cells.forEach(cell => cell.textContent = '');
+    currentPlayer = '❌';
+    gameActive = true;
+    updateStatus(`دور اللاعب ${currentPlayer}`);
+  }
+
+  cells.forEach(cell => {
+    cell.addEventListener('click', handleCellClick);
+    cell.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        cell.click();
+      }
+    });
+  });
+
+  restartBtn.addEventListener('click', restartGame);
+
+  // بدء اللعبة
+  updateStatus(`دور اللاعب ${currentPlayer}`);
+</script>
+
+</body>
+</html>
