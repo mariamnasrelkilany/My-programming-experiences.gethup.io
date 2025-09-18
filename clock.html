@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>الساعة الرقمية ⏰</title>
+<style>
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #d8b4e2 100%);
+    color: #3a2a5a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+  }
+  .clock {
+    font-size: 5rem;
+    background: #fff;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(90,79,207,0.15);
+    color: #5a4fcf;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  a {
+    margin-top: 2rem;
+    color: #5a4fcf;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="clock" aria-live="polite" aria-atomic="true" role="timer">00:00:00</div>
+
+<a href="index.html">⬅ العودة للرئيسية</a>
+
+<script>
+  function updateClock() {
+    const clock = document.querySelector('.clock');
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2, '0');
+    const m = now.getMinutes().toString().padStart(2, '0');
+    const s = now.getSeconds().toString().padStart(2, '0');
+    clock.textContent = `${h}:${m}:${s}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>

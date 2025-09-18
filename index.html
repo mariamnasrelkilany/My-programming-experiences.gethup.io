@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجاربي البرمجية 💻</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+  @media (max-width: 480px) {
+    .card-icon {
+      font-size: 3.5rem;
+    }
+  }
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #d8b4e2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #3a2a5a;
+  }
+  header {
+    background: rgba(90, 79, 207, 0.85);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 15px rgba(90,79,207,0.4);
+  }
+  nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  nav a {
+    background: #fff;
+    color: #5a4fcf;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(90,79,207,0.2);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  nav a:hover,
+  nav a:focus {
+    background: #5a4fcf;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(90,79,207,0.6);
+    outline: none;
+  }
+  main {
+    flex: 1;
+    max-width: 960px;
+    margin: 2rem auto 3rem;
+    padding: 0 1rem;
+    text-align: center;
+  }
+  main h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(90,79,207,0.4);
+  }
+  main p {
+    font-size: 1.1rem;
+    color: #4b3a7a;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 2rem;
+  }
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 8px 20px rgba(90,79,207,0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .card:hover,
+  .card:focus {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(90,79,207,0.35);
+    outline: none;
+  }
+  .card-icon {
+    font-size: 4.2rem;
+    margin-bottom: 1rem;
+    color: #5a4fcf;
+    filter: drop-shadow(0 2px 2px rgba(90,79,207,0.3));
+  }
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: #3a2a5a;
+  }
+  .card-desc {
+    font-size: 1rem;
+    color: #6b5ca5;
+    line-height: 1.4;
+  }
+  footer {
+    background: rgba(90, 79, 207, 0.85);
+    color: #fff;
+    text-align: center;
+    padding: 0.8rem 0;
+    font-size: 0.95rem;
+    box-shadow: 0 -4px 15px rgba(90,79,207,0.4);
+  }
+  /* Responsive */
+  @media (max-width: 480px) {
+    header {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    main h1 {
+      font-size: 1.8rem;
+    }
+    .card-icon {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>My programming experiences 💻</div>
+  <nav aria-label="قائمة التنقل الرئيسية">
+    <a href="index.html" tabindex="0">الرئيسية</a>
+    <a href="clock.html" tabindex="0">الساعة الرقمية ⏰</a>
+    <a href="calculator.html" tabindex="0">الآلة الحاسبة 🧮</a>
+    <a href="xo.html" tabindex="0">لعبة XO ❌⭕</a>
+  </nav>
+</header>
+
+<main>
+  <h1>مرحبًا بك في تجاربي البرمجية</h1>
+  <p>هنا بجمع كل التجارب والمشاريع الصغيرة اللي بعملها أثناء تعلم البرمجة.</p>
+
+  <section class="cards-container" aria-label="مشاريع البرمجة">
+    <a href="clock.html" class="card" tabindex="0" aria-describedby="desc-clock">
+      <div class="card-icon" aria-hidden="true">⏰</div>
+      <div class="card-title">الساعة الرقمية</div>
+      <div class="card-desc" id="desc-clock">ساعة متحركة بالوقت الحقيقي.</div>
+    </a>
+
+    <a href="calculator.html" class="card" tabindex="0" aria-describedby="desc-calc">
+      <div class="card-icon" aria-hidden="true">🧮</div>
+      <div class="card-title">الآلة الحاسبة</div>
+      <div class="card-desc" id="desc-calc">جمع، طرح، ضرب، وقسمة بسيطة.</div>
+    </a>
+
+    <a href="xo.html" class="card" tabindex="0" aria-describedby="desc-xo">
+      <div class="card-icon" aria-hidden="true">❌⭕</div>
+      <div class="card-title">لعبة XO</div>
+      <div class="card-desc" id="desc-xo">العب مع صديق أو ضد الكمبيوتر.</div>
+    </a>
+  </section>
+
+  <!-- قسم جديد لمشاريع خارجية -->
+  <h2 style="margin-top: 3rem; color: #5a4fcf; text-shadow: 1px 1px 3px rgba(90,79,207,0.4);">مشاريعي الأخرى</h2>
+  <section class="cards-container" aria-label="مشاريعي الخارجية">
+    <a href="https://mariamnasrelkilany.github.io/kidszone/about.html" target="_blank" rel="noopener" class="card" tabindex="0" aria-describedby="desc-kidszone">
+      <div class="card-icon" aria-hidden="true">🌟</div>
+      <div class="card-title">Kids Zone</div>
+      <div class="card-desc" id="desc-kidszone">موقع تعليمي للأطفال.</div>
+    </a>
+
+    <a href="https://mariamnasrelkilany.github.io/Devport/index.html" target="_blank" rel="noopener" class="card" tabindex="0" aria-describedby="desc-devport">
+      <div class="card-icon" aria-hidden="true">🚀</div>
+      <div class="card-title">DevPort</div>
+      <div class="card-desc" id="desc-devport">محفظة مشاريع التطوير الخاصة بي.</div>
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  جميع الحقوق محفوظة © 2025
+</footer>
+
+</body>
+</html>
